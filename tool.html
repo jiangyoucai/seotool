@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>百度/搜狗/好搜/必应下拉框关键词查询-盼盼工具</title>
+    <meta name="keywords" content="百度下拉框关键词查询,搜狗下拉框关键词查询,好搜下拉框关键词查询,必应下拉框关键词查询">
+    <link rel="stylesheet" href="http://static.ipanpan.com/base.min.css"/>
+    <style>
+        .main {
+            width: 100%;
+            margin: 0 auto;
+            background: #f0f0f0;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+        }
+
+        .header, .footer {
+            clear: both;
+            height: 50px;
+            background: #ffffff;
+            border: 1px solid #F0F0F0;
+        }
+
+        .search {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            height: 160px;
+        }
+
+        .search input {
+            width: 70%;
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid #c9d8db;
+            box-sizing: border-box;
+            padding: 0 2%;
+            margin: 55px 0;
+            font-size: 14px;
+            float: left;
+            line-height: 50px;
+        }
+
+        .search span {
+            width: 22%;
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid #c9d8db;
+            margin: 55px 0 55px 4%;
+            font-size: 14px;
+            display: block;
+            text-align: center;
+            line-height: 50px;
+            box-sizing: border-box;
+            float: left;
+            cursor: pointer;
+        }
+
+        .search span:hover {
+            background: #c9d8db;
+        }
+
+        .site {
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px 0;
+            border-bottom: 1px dotted #c9d8db;
+        }
+
+        .site p {
+            width: 100%;
+            margin: 0 auto;
+            max-width: 160px;
+            border-radius: 80px;
+            height: 160px;
+            border: 1px solid #c9d8db;
+            text-align: center;
+            line-height: 160px;
+            font-size: 24px;
+        }
+
+        .sug li {
+            width: 96%;
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px dotted #c9d8db;
+            padding: 0 2%;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    </div>
+    <div class="search">
+        <input type="text" placeholder="输入关键词搜索"/><span>搜索</span>
+    </div>
+    <div class="content">
+        <div class="view">
+        </div>
+    </div>
+    <div class="footer">
+    </div>
+</div>
+<script type="text/javascript" src="http://static.ipanpan.com/zepto.1.0.min.js"></script>
+<script>
+    (function ($) {
+        $('.search span').on('click', function () {
+            $('.view').empty();
+            var keyword = $('.search input').val();
+            if (keyword.length > 0) {
+                baidu_data(keyword);
+                sogou_data(keyword);
+                haosou_data(keyword);
+                bing_data(keyword);
+            } else {
+                alert('输入空值，请您重试！');
+            }
+        });
+    })(Zepto);
+    function baidu_data(keyword) {
+        window.baidu = {};
+        window.baidu.sug = function (data) {
+//            console.log(data.s);
+            var result = '<div class="site"><p>百度</p></div><div class="sug"><ul>';
+            $.each(data.s, function (k, v) {
+                result += '<li>' + v + '</li>'
+            });
+            result += '</ul></div>';
+            $('.view').append(result);
+        };
+        var url = 'http://suggestion.baidu.com/su?wd=' + keyword;
+        load_script(url, function () {
+        });
+    }
+    function sogou_data(keyword) {
+        window.sogou = {};
+        window.sogou.sug = function (data) {
+//            console.log(data[1]);
+            var result = '<div class="site"><p>搜狗</p></div><div class="sug"><ul>';
+            $.each(data[1], function (k, v) {
+                result += '<li>' + v + '</li>'
+            });
+            result += '</ul></div>';
+            $('.view').append(result);
+        };
+        var url = 'http://w.sugg.sogou.com/sugg/ajaj_json.jsp?key=' + keyword + '&type=web&ori=yes&pr=web&abtestid=1&ipn=';
+        load_script(url, function () {
+        });
+    }
+    function haosou_data(keyword) {
+        window.suggest_so = function (data) {
+//            console.log(data.result);
+            var result = '<div class="site"><p>好搜</p></div><div class="sug"><ul>';
+            $.each(data.result, function (k, v) {
+                result += '<li>' + v['word'] + '</li>'
+            });
+            result += '</ul></div>';
+            $('.view').append(result);
+        };
+        var url = 'http://sug.so.360.cn/suggest?callback=suggest_so&encodein=utf-8&encodeout=utf-8&format=json&fields=word,obdata&word=' + keyword;
+        load_script(url, function () {
+        });
+    }
+    function bing_data(keyword) {
+        window.bing = {};
+        window.bing.sug = function (data) {
+//            console.log(data.result);
+            var result = '<div class="site"><p>必应</p></div><div class="sug"><ul>';
+            $.each(data.result, function (k, v) {
+                result += '<li>' + v + '</li>'
+            });
+            result += '</ul></div>';
+            $('.view').append(result);
+        };
+        var url = 'http://www.ipanpan.com/api/bing/sug/' + keyword;
+        load_script(url, function () {
+        });
+    }
+    function load_script(url, callback) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = url;
+        script.onload = script.onreadystatechange = function () {
+            if ((!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+                callback && callback();
+                script.onload = script.onreadystatechange = null;
+                if (head && script.parentNode) {
+                    head.removeChild(script);
+                }
+            }
+        };
+        head.insertBefore(script, head.firstChild);
+    }
+    console.info('{"author":"andy.jiang","date":"2015-05-23","email":"150haomengting@gmail.com"}');
+</script>
+<div style="display: none">
+    <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1254623058'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/stat.php%3Fid%3D1254623058' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+</body>
+</html>
