@@ -116,19 +116,27 @@
 <script type="text/javascript" src="http://static.ipanpan.com/zepto.1.0.min.js"></script>
 <script>
     (function ($) {
-        $('.search span').on('click', function () {
-            $('.view').empty();
-            var keyword = $('.search input').val();
-            if (keyword.length > 0) {
-                baidu_data(keyword);
-                sogou_data(keyword);
-                haosou_data(keyword);
-                bing_data(keyword);
-            } else {
-                alert('输入空值，请您重试！');
+        $('body').on('keydown', function () {
+            if (event.keyCode == "13") {
+                search_data();
             }
         });
+        $('.search span').on('click', function () {
+            search_data();
+        });
     })(Zepto);
+    function search_data() {
+        $('.view').empty();
+        var keyword = $('.search input').val();
+        if (keyword.length > 0) {
+            baidu_data(keyword);
+            sogou_data(keyword);
+            haosou_data(keyword);
+            bing_data(keyword);
+        } else {
+            alert('输入空值，请您重试！');
+        }
+    }
     function baidu_data(keyword) {
         window.baidu = {};
         window.baidu.sug = function (data) {
