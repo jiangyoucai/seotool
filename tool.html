@@ -93,6 +93,10 @@
             padding: 0 2%;
             font-size: 16px;
         }
+
+        .sug li a:hover {
+            color: #1aac53;
+        }
     </style>
 </head>
 <body>
@@ -131,7 +135,7 @@
 //            console.log(data.s);
             var result = '<div class="site"><p>百度</p></div><div class="sug"><ul>';
             $.each(data.s, function (k, v) {
-                result += '<li>' + v + '</li>'
+                result += '<li><a href="https://www.baidu.com/s?wd=' + v + '" target="_blank">' + v + '</a></li>';
             });
             result += '</ul></div>';
             $('.view').append(result);
@@ -146,7 +150,7 @@
 //            console.log(data[1]);
             var result = '<div class="site"><p>搜狗</p></div><div class="sug"><ul>';
             $.each(data[1], function (k, v) {
-                result += '<li>' + v + '</li>'
+                result += '<li><a href="http://www.sogou.com/web?query=' + v + '" target="_blank">' + v + '</a></li>';
             });
             result += '</ul></div>';
             $('.view').append(result);
@@ -160,7 +164,7 @@
 //            console.log(data.result);
             var result = '<div class="site"><p>好搜</p></div><div class="sug"><ul>';
             $.each(data.result, function (k, v) {
-                result += '<li>' + v['word'] + '</li>'
+                result += '<li><a href="http://www.haosou.com/s?q=' + v['word'] + '" target="_blank">' + v['word'] + '</a></li>';
             });
             result += '</ul></div>';
             $('.view').append(result);
@@ -175,7 +179,7 @@
 //            console.log(data.result);
             var result = '<div class="site"><p>必应</p></div><div class="sug"><ul>';
             $.each(data.result, function (k, v) {
-                result += '<li>' + v + '</li>'
+                result += '<li><a href="http://cn.bing.com/search?q=' + v + '" target="_blank">' + v + '</a></li>';
             });
             result += '</ul></div>';
             $('.view').append(result);
