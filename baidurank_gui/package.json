@@ -1,0 +1,31 @@
+{
+  "name": "baidurank",
+  "version": "1.0.0",
+  "main": "main.js",
+  "description": "tool for check rank of baidu",
+  "dependencies": {
+    "cheerio": "~0.19.0",
+    "jquery": "~2.1.4",
+    "request": "~2.55.0",
+    "urlencode": "~1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jiangyoucai/seotool"
+  },
+  "keywords": [
+    "baidu",
+    "rank",
+    "atom-shell",
+    "gui"
+  ],
+  "author": "jiangyoucai",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/jiangyoucai/seotool/issues"
+  }
+}

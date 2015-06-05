@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BaiduRank-盼盼工具</title>
+    <link rel="stylesheet" href="http://static.ipanpan.com/base.min.css"/>
+    <style>
+        input, textarea, .bar button {
+            border-radius: 5px;
+            border: 1px solid #c9d8db;
+            box-sizing: border-box;
+            font-family: "Source Han Sans CN", "sans-serif", "DejaVu Sans Mono";
+            font-size: 16px;
+        }
+
+        input, textarea, .bar {
+            margin: 0 2%;
+        }
+
+        input, textarea {
+            width: 96%;
+        }
+
+        input, .bar button {
+            height: 50px;
+            padding: 0 1%;
+        }
+
+        textarea {
+            padding: 10px 1%;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .line {
+            clear: both;
+            width: 100%;
+            margin: 0 auto;
+            height: 20px;
+        }
+
+        .bar {
+            width: 96%;
+        }
+
+        .bar button {
+            width: 15%;
+            background: #c9d8db;
+            float: left;
+        }
+
+        .bar .start {
+            float: right;
+        }
+
+        .bar p {
+            width: 30%;
+            margin: 0 20%;
+            float: left;
+            text-align: center;
+            border-radius: 5px;
+            border: 1px solid #c9d8db;
+            box-sizing: border-box;
+            line-height: 50px;
+            font-family: "Source Han Sans CN", "sans-serif", "DejaVu Sans Mono";
+        }
+
+        .bar p span {
+            width: 50%;
+            margin: 0 auto;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .bar .current {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+<div class="line"></div>
+<input class="domain" type="text" placeholder="域名，不带http://"/>
+
+<div class="line"></div>
+<textarea class="keywords" autosize="on" cols="30" rows="30" placeholder="关键词，一行一个">
+</textarea>
+<textarea class="results" autosize="on" cols="30" rows="30" placeholder="排名，一行一个">
+</textarea>
+
+<div class="line"></div>
+<div class="bar">
+    <button class="reset">重置</button>
+    <p><span class="current" >关键词</span><span >排名</span></p>
+    <button class="start">开始</button>
+</div>
+<div class="line"></div>
+<script src="rank.js"></script>
+</body>
+</html>
