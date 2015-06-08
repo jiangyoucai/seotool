@@ -92,7 +92,7 @@ function get_data(keyword, domain, callback) {
         var len = results.length;
         for (var i = 0; i < len; i++) {
             var result = $(results[i]).html();
-            if (result && result.indexOf(domain) > 0) {
+            if (result && result.indexOf(domain) >= 0) {
                 rank = i + 1;
                 break;
             }
