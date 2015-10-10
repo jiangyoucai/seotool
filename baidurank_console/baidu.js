@@ -7,18 +7,21 @@ function get_data(keyword, domain, callback) {
     var url = "http://www.baidu.com/s?wd=" + keyword + "&rn=50";
     net.get(url, function (data) {
         var $ = cheerio.load(data);
-        var results = $('.f13 .g');
+        var results = $('.c-container');
         var rank = 0;
         var len = results.length;
         for (var i = 0; i < len; i++) {
-            var result = $(results[i]).html();
-            if (result && result.indexOf(domain) >= 0) {
+            $ = cheerio.load(results[i]);
+            var result_baidu = $('.c-showurl').html();
+            var result_other = $('.f13 .g').html();
+            var result = result_baidu + result_other;
+            if (result && result.indexOf(domain) > 0) {
                 rank = i + 1;
                 break;
             }
         }
-        var data = keyword + '\t' + rank;
-        callback(data);
+        var value = keyword + '\t' + rank;
+        callback(value);
     });
 }
 
